@@ -15,9 +15,9 @@ export default function Stats({ user }: any) {
 
   const title = generateTitleAndLevel(stats?.data && stats?.data!.exp)
   return (
-    <main className="p-4 md:p-8 xl:py-16">
+    <main className="p-4 md:p-8 xl:py-16 w-full">
 
-      <div className="border border-gray-500 border-dashed p-4 w-fit">
+      <div className="border border-gray-500 border-dashed p-4 w-fit block mx-auto">
         <div className="h-[200px] w-[200px]">
           <img src={`./stats/${title.level}.png`} alt="" className="pointer-events-none" />
         </div>
