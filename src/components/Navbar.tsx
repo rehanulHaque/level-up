@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { Settings, User } from "lucide-react";
+import { User } from "lucide-react";
 import { useState } from "react";
 import SideBar from "./SideBar";
 
