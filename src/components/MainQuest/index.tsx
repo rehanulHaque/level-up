@@ -148,7 +148,6 @@ export default function MainQuest({ user }: TodayMissionProps) {
 
   return (
     <div className="ml-2 md:ml-6">
-      <h1 className="text-xs text-gray-400">Complete all the mission in 1 month</h1>
       <ul>
         {isLoading ? (
           <p>Loading...</p>

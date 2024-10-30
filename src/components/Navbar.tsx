@@ -1,46 +1,48 @@
-import { Button, Text } from "@chakra-ui/react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { Settings, User } from "lucide-react";
+import { useState } from "react";
+import SideBar from "./SideBar";
 
-export default function Navbar() {
-  const [user, setUser] = useState("");
-  const [loading, setLoading] = useState(true);
+export default function Navbar({ user }: any) {
+  const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user?.displayName || user?.email || "");
-      setLoading(false);
-    });
-
-    return () => unsubscribe(); // Clean up subscription on unmount
-  }, []);
 
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/login");
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state
-  }
-
   return (
-    <div className="flex justify-between items-center px-4 py-2 shadow-md">
-      <div className="flex gap-2 items-center">
-        <Text fontWeight="bold" className="font-bold text-xl">Level UP</Text>
-        {/* <p>{user}</p> */}
+    <div className="flex justify-between items-center   shadow-md">
+      <div className="flex gap-2 items-center py-2 px-4">
+        <Link to="/">
+          <img src="./main_logo.png" className="h-[23px]" />
+        </Link>
       </div>
-      <div>
+      <div className="relative py-2 px-4">
         {user ? (
-          <Button onClick={handleLogout}>Logout</Button>
+          <div>
+            <button
+              className="hidden md:block lg:block px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 font-medium transition-all"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+            <div
+              className="md:hidden lg:hidden cursor-pointer px-3 py-2 bg-gray-200 rounded-md hover:bg-gray-300 font-medium transition-all z-50"
+              onClick={() => setShowSidebar(!showSidebar)}
+            >
+              <User />
+            </div>
+          </div>
         ) : (
-          <Button>
+          <button>
             <Link to="/login">Login</Link>
-          </Button>
+          </button>
         )}
+        {showSidebar && <SideBar setSidebar={setShowSidebar}/>}
       </div>
     </div>
   );
