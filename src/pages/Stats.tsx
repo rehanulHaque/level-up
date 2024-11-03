@@ -25,6 +25,8 @@ export default function Stats({ user }: any) {
           <h1 className="font-semibold text-xl">Title: <span className="font-medium">{title.title}</span></h1>
           <h2 className="font-semibold text-lg">Level: <span className="font-medium">{title.level}</span></h2>
           <h2 className="font-semibold text-lg">Exp: <span className="font-medium">{stats?.data && stats?.data!.exp}</span></h2>
+          <p className="font-normal text-lg">Current Streak: {stats?.data && stats?.data!.streakCount}</p>
+          <p className="font-normal text-lg">Max Streak: {stats?.data && stats?.data!.maxStreak}</p>
         </div>
       </div>
     </main>

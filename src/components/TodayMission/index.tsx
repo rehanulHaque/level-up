@@ -4,7 +4,7 @@ import {
   deleteTodayMission,
   getTodayMission,
   updateTodayMission,
-} from "../../Query/query";
+} from "../../Query/todayQuery";
 import { Button, Input, useDisclosure } from "@chakra-ui/react";
 import {
   Modal,

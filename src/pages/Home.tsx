@@ -4,18 +4,36 @@ import { Button } from "@chakra-ui/react";
 import MainQuest from "../components/MainQuest";
 import SideQuest from "../components/SideQuest";
 import TodayMission from "../components/TodayMission";
+import { getUserStats } from "../Query/stats";
+import { useQuery } from "react-query";
+
+const useGetStats = (uid: string) => {
+  return useQuery({
+    queryKey: ["UserStats", uid],
+    queryFn: () => getUserStats(uid),
+  });
+};
 
 export default function Home({ user }: any) {
+
   const [showMainQuest, setShowMainQuest] = useState(false);
   const [showSideQuest, setShowSideQuest] = useState(false);
   const [showTodayMission, setShowTodayMission] = useState(true);
+
+  // Fetch user Stats
+  const { data: stats, isLoading: isLoading } = useGetStats(user.uid);
 
   return (
     <main className="p-4 md:p-8 xl:py-16">
       <div className="flex justify-between mb-2">
         <div className="flex gap-2 items-center">
           <h1 className="text-3xl font-bold">{user.displayName}</h1>
-          <img src="./fire_gif.gif" alt="" className="h-8 w-8" />
+          <div className="flex items-center">
+            <img src="./fire_gif.gif" alt="" className="h-8 w-8" />
+            <span className="text-3xl font-bold">
+              {isLoading ? "0" : stats?.data?.streakCount}
+            </span>
+          </div>
         </div>
         <div className="hidden md:block lg:block">
           <Button size={"sm"}>

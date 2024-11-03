@@ -177,7 +177,7 @@ export default function MainQuest({ user }: TodayMissionProps) {
                 </p>
               </div>
               <p className="text-xs text-gray-400">
-                If you can't do this in the given time, this is the punishment:
+                If you can't do the task, this is the punishment:
               </p>
               <div className="flex justify-between items-center mb-1 md:mb-2">
                 <p className="flex gap-1 items-center">

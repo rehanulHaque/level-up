@@ -2,11 +2,10 @@ import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { User } from "lucide-react";
-import { useState } from "react";
 import SideBar from "./SideBar";
 
-export default function Navbar({ user }: any) {
-  const [showSidebar, setShowSidebar] = useState(false);
+
+export default function Navbar({ user, setSidebar, showSidebar }: any) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -32,7 +31,7 @@ export default function Navbar({ user }: any) {
             </button>
             <div
               className="md:hidden lg:hidden cursor-pointer px-3 py-2 bg-gray-200 rounded-md hover:bg-gray-300 font-medium transition-all z-50"
-              onClick={() => setShowSidebar(!showSidebar)}
+              onClick={() => setSidebar((prev: any) => !prev)}
             >
               <User />
             </div>
@@ -42,7 +41,7 @@ export default function Navbar({ user }: any) {
             <Link to="/login">Login</Link>
           </button>
         )}
-        {showSidebar && <SideBar setSidebar={setShowSidebar}/>}
+        {showSidebar && <SideBar setSidebar={setSidebar}/>}
       </div>
     </div>
   );
