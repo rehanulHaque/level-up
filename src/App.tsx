@@ -30,12 +30,14 @@ export default function App() {
   return (
     <main>
       <Navbar user={user} setSidebar={setShowSidebar} showSidebar={showSidebar} />
+      <div onClick={() => setShowSidebar(false)}>
       <Routes>
         <Route path="/" element={<Home user={user} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/stats" element={<Stats user={user} />} />
       </Routes>
+      </div>
     </main>
   );
 }

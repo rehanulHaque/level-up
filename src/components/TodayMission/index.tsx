@@ -138,7 +138,6 @@ export default function TodayMission({ user }: TodayMissionProps) {
     const expired = currentTime - missionTime > 24 * 60 * 60 * 1000
     return {expired, id: item.id}
   })
-  // console.log(isExpired)
   isExpired?.forEach((item: any) =>{
     if(item.expired){
       handelDelete(item.id)
