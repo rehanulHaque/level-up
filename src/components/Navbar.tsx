@@ -17,8 +17,7 @@ export default function Navbar({ user, setSidebar, showSidebar }: any) {
       <div className="app-container flex items-center justify-between py-3">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
-            <img src="./main_logo.png" alt="logo" className="h-8 w-8" />
-            <span className="font-semibold text-lg">LevelUp</span>
+            <img src="./main_logo.png" alt="logo" className="h-6" />
           </Link>
         </div>
 
