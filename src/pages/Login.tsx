@@ -1,10 +1,8 @@
 import {
   Button,
-  Container,
   FormControl,
   FormLabel,
   Input,
-  Text,
   useToast,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -41,44 +39,35 @@ export default function Login() {
     reset();
   };
   return (
-    <main className="flex items-center justify-between min-h-screen">
-      <Container marginTop={"6"}>
-        <Text fontSize={"3xl"} as={"b"}>
-          Login to your account
-        </Text>
-        <form onSubmit={handleSubmit(onSubmitHandler)}>
+    <main className="app-container pt-28">
+      <div className="max-w-md mx-auto card">
+        <h2 className="text-2xl font-semibold mb-2">Login to your account</h2>
+        <p className="muted mb-4">Welcome back — continue your progress</p>
+        <form onSubmit={handleSubmit(onSubmitHandler)} className="flex flex-col gap-3">
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input type="text" {...register("email")} />
           </FormControl>
           <FormControl>
             <FormLabel>Password</FormLabel>
-            <Input type="text" {...register("password")} />
+            <Input type="password" {...register("password")} />
           </FormControl>
           <Button
             marginTop={"4"}
             type="submit"
-            className="w-full disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full disabled:cursor-not-allowed disabled:opacity-50 btn-accent"
             disabled={loading}
           >
             Login
           </Button>
         </form>
-        <Text marginTop={"4"} className="text-center">
-          or
-        </Text>
-        <Button
-          marginTop={"4"}
-          className="w-full disabled:cursor-not-allowed disabled:opacity-50"
-          disabled={true}
-        >
+        <div className="text-center my-4 muted">or</div>
+        <Button className="w-full disabled:cursor-not-allowed disabled:opacity-50" disabled={true}>
           <img src="./google_logo.svg" className="w-4 h-4 mr-2" />
           Login with Google
         </Button>
-        <Text marginTop={"4"} className="text-center">
-          Dont have an account? <Link to="/signup">Signup</Link>
-        </Text>
-      </Container>
+        <p className="text-center mt-4 muted">Dont have an account? <Link to="/signup" className="accent">Signup</Link></p>
+      </div>
     </main>
   );
 }

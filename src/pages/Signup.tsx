@@ -1,10 +1,8 @@
 import {
   Button,
-  Container,
   FormControl,
   FormLabel,
   Input,
-  Text,
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -60,12 +58,11 @@ export default function Signup() {
     reset();
   };
   return (
-    <main className="flex items-center justify-between min-h-screen">
-      <Container marginTop={"6"}>
-        <Text fontSize={"3xl"} as={"b"}>
-          Create an account
-        </Text>
-        <form onSubmit={handleSubmit(onSubmitHandler)}>
+    <main className="app-container pt-28">
+      <div className="max-w-md mx-auto card">
+        <h2 className="text-2xl font-semibold mb-2">Create an account</h2>
+        <p className="muted mb-4">Join and start building your streak</p>
+        <form onSubmit={handleSubmit(onSubmitHandler)} className="flex flex-col gap-3">
           <FormControl>
             <FormLabel>Name</FormLabel>
             <Input type="text" {...register("name")} />
@@ -76,32 +73,24 @@ export default function Signup() {
           </FormControl>
           <FormControl>
             <FormLabel>Password</FormLabel>
-            <Input type="text" {...register("password")} />
+            <Input type="password" {...register("password")} />
           </FormControl>
           <Button
             marginTop={"4"}
             type="submit"
-            className="w-full disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full disabled:cursor-not-allowed disabled:opacity-50 btn-accent"
             disabled={loading}
           >
             Sign up
           </Button>
         </form>
-        <Text marginTop={"4"} className="text-center">
-          or
-        </Text>
-        <Button
-          marginTop={"4"}
-          className="w-full disabled:cursor-not-allowed disabled:opacity-50"
-          disabled={true}
-        >
+        <div className="text-center my-4 muted">or</div>
+        <Button className="w-full disabled:cursor-not-allowed disabled:opacity-50" disabled={true}>
           <img src="./google_logo.svg" className="w-4 h-4 mr-2" />
           Sign up with Google
         </Button>
-        <Text marginTop={"4"} className="text-center">
-          Already have an account? <Link to="/login">Login</Link>
-        </Text>
-      </Container>
+        <p className="text-center mt-4 muted">Already have an account? <Link to="/login" className="accent">Login</Link></p>
+      </div>
     </main>
   );
 }

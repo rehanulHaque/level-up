@@ -1,9 +1,8 @@
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { User } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
 import SideBar from "./SideBar";
-
 
 export default function Navbar({ user, setSidebar, showSidebar }: any) {
   const navigate = useNavigate();
@@ -14,35 +13,37 @@ export default function Navbar({ user, setSidebar, showSidebar }: any) {
   };
 
   return (
-    <div className="flex justify-between items-center   shadow-md">
-      <div className="flex gap-2 items-center py-2 px-4">
-        <Link to="/">
-          <img src="./main_logo.png" className="h-[23px]" />
-        </Link>
+    <header className="navbar-glass fixed top-0 left-0 right-0 z-40">
+      <div className="app-container flex items-center justify-between py-3">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2">
+            <img src="./main_logo.png" alt="logo" className="h-8 w-8" />
+            <span className="font-semibold text-lg">LevelUp</span>
+          </Link>
+        </div>
+
+        <nav className="hidden md:flex gap-6 items-center">
+          <Link to="/" className="muted hover:accent">Home</Link>
+          <Link to="/stats" className="muted hover:accent">Stats</Link>
+          <Link to="/recurring" className="muted hover:accent">Recurring</Link>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          {user ? (
+            <>
+              <button className="hidden md:inline-block btn-accent" onClick={handleLogout}>Logout</button>
+              <div className="md:hidden">
+                <button onClick={() => setSidebar((prev: any) => !prev)} className="p-2 bg-white rounded-full shadow-sm">
+                  <UserIcon />
+                </button>
+              </div>
+            </>
+          ) : (
+            <Link to="/login" className="btn-accent">Login</Link>
+          )}
+        </div>
       </div>
-      <div className="relative py-2 px-4">
-        {user ? (
-          <div>
-            <button
-              className="hidden md:block lg:block px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 font-medium transition-all"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
-            <div
-              className="md:hidden lg:hidden cursor-pointer px-3 py-2 bg-gray-200 rounded-md hover:bg-gray-300 font-medium transition-all z-50"
-              onClick={() => setSidebar((prev: any) => !prev)}
-            >
-              <User />
-            </div>
-          </div>
-        ) : (
-          <button>
-            <Link to="/login">Login</Link>
-          </button>
-        )}
-        {showSidebar && <SideBar setSidebar={setSidebar}/>}
-      </div>
-    </div>
+      {showSidebar && <SideBar setSidebar={setSidebar} />}
+    </header>
   );
 }

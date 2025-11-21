@@ -13,34 +13,63 @@ const links = [
     id: 0,
     name: "Home",
     path: "/",
-    icon: <Usericon/>
+    icon: <Usericon />,
   },
   {
     id: 1,
     name: "Stats",
     path: "/stats",
-    icon: <ChartLine/>
+    icon: <ChartLine />,
   },
-]
+  {
+    id: 2,
+    name: "Recurring",
+    path: "/recurring",
+    icon: <ChartLine />,
+  },
+];
+
 export default function SideBar({ setSidebar }: SidebarProps) {
   const navigate = useNavigate();
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/login");
   };
+
   return (
-    <div className="h-screen bg-gray-100 absolute w-[200px] top-0 right-0 flex flex-col gap-3">
-      {links.map((link) => (
-        <div className="cursor-pointer px-3 py-2 rounded-md font-medium transition-all" key={link.id} onClick={() => setSidebar((prev: any) => !prev)}>
-        <Link to={link.path} className="flex gap-2" >
-          <span>{link.icon}</span>
-         <span>{link.name}</span>
-         </Link>
+    <aside className="fixed top-0 right-0 h-screen w-64 p-6 z-50">
+      <div className="card h-full flex flex-col justify-between">
+        <div>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold">Account</h3>
+            <p className="text-sm muted">Quick links</p>
+          </div>
+
+          <nav className="flex flex-col gap-3">
+            {links.map((link) => (
+              <Link
+                to={link.path}
+                key={link.id}
+                onClick={() => setSidebar((prev: any) => !prev)}
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-gray-600">{link.icon}</span>
+                <span className="font-medium">{link.name}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-2 justify-center py-2 px-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg"
+          >
+            <LogOutIcon />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
-      ))}
-      <button onClick={handleLogout} className="flex items-center gap-2 justify-center absolute bottom-4 left-0 px-4 py-3 bg-purple-500 rounded-md text-white font-medium transition-all w-full">
-        <LogOutIcon/> Logout
-      </button>
-    </div>
+    </aside>
   );
 }
